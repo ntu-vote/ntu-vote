@@ -6,6 +6,7 @@
     "start": "node dist/bin/server.ts",
     "build": "tsc&&cp -RT public dist/public && cp package.json dist/package.json",
     "dev": "npx nodemon -e ts,tsx --exec ts-node bin/server.ts",
+    "test": "echo \"Error: no test specified\" && exit 0",
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint . --ext .ts --fix",
     "typeorm-sync": "ts-node ./node_modules/typeorm/cli -f ./ormconfig.json migration:generate -n",
