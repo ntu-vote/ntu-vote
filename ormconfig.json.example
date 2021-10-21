@@ -1,0 +1,17 @@
+{
+  "name": "default",
+  "type": "mariadb",
+  "host": "localhost",
+  "port": 3306,
+  "username": "database-user",
+  "password": "database-password",
+  "database": "ntu_vote",
+  "synchronize": false,
+  "logging": false,
+  "entities": ["orm/entity/**/*.ts"],
+  "migrations": ["orm/migration/**/*.ts"],
+  "cli": {
+    "entitiesDir": "orm/entity",
+    "migrationsDir": "orm/migration"
+  }
+}
