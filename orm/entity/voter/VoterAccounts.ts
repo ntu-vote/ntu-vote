@@ -28,7 +28,7 @@ export class VoterAccount {
     onDelete: 'RESTRICT',
     onUpdate: 'RESTRICT',
   })
-  @JoinColumn()
+  @JoinColumn({ name: "voter_info" })
   info: VoterInfo
 
   @OneToOne(() => VoterPublicKey, {
@@ -36,7 +36,7 @@ export class VoterAccount {
     onDelete: 'RESTRICT',
     onUpdate: 'RESTRICT',
   })
-  @JoinColumn()
+  @JoinColumn({ name: "voter_public_key" })
   publicKey: VoterPublicKey
 
   @OneToOne(() => VoterPrivateKey, {
@@ -44,6 +44,6 @@ export class VoterAccount {
     onDelete: 'RESTRICT',
     onUpdate: 'RESTRICT',
   })
-  @JoinColumn()
+  @JoinColumn({ name: "voter_private_key" })
   privateKey: VoterPrivateKey
 }
