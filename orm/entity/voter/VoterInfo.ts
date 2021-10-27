@@ -14,7 +14,7 @@ export class VoterInfo {
   @Column('varchar', {
     name: 'student_id',
     nullable: false,
-    length: 64,
+    length: 9,
     unique: true,
   })
   studentId: string

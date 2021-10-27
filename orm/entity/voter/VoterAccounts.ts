@@ -27,20 +27,20 @@ export class VoterAccount {
     cascade: true,
     onDelete: 'RESTRICT',
   })
-  @JoinColumn({ name: "voter_info" })
+  @JoinColumn({ name: "uid" })
   info: VoterInfo
 
   @OneToOne(() => VoterPublicKey, {
     cascade: true,
     onDelete: 'RESTRICT',
   })
-  @JoinColumn({ name: "voter_public_key" })
+  @JoinColumn({ name: "pub_id" })
   publicKey: VoterPublicKey
 
   @OneToOne(() => VoterPrivateKey, {
     cascade: true,
     onDelete: 'RESTRICT',
   })
-  @JoinColumn({ name: "voter_private_key" })
+  @JoinColumn({ name: "prv_id" })
   privateKey: VoterPrivateKey
 }

@@ -5,8 +5,8 @@ export class CampaignRule {
   @PrimaryGeneratedColumn({ type: 'int', name: 'cprn_id' })
   cprn_id: number
 
-  @Column('varchar', { name: 'verification_str', nullable: false, length: 64 })
-  verificationStr: string
+  @Column('varchar', { name: 'rule', nullable: false, length: 64 })
+  rule: string
 
   @Column('smallint', {
     name: 'live',
