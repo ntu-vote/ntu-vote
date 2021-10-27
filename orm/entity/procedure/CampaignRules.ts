@@ -2,8 +2,8 @@ import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm'
 
 @Entity('campaign_rules', { schema: 'ntu_vote' })
 export class CampaignRule {
-  @PrimaryGeneratedColumn({ type: 'int', name: 'cprn_id' })
-  cprn_id: number
+  @PrimaryGeneratedColumn({ type: 'int', name: 'cpnr_id' })
+  cpnr_id: number
 
   @Column('varchar', { name: 'rule', nullable: false, length: 64 })
   rule: string
