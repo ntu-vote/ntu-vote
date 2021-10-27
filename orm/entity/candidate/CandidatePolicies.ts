@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm'
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm'
+import { CandidateInfo } from './CandidateInfo'
 
 @Entity('candidate_policies', { schema: 'ntu_vote' })
 export class CandidatePolicy {
@@ -10,4 +11,11 @@ export class CandidatePolicy {
 
   @Column('text', { name: 'description', nullable: true })
   description: string | null
+
+  @ManyToOne(() => CandidateInfo, (candidateInfo) => candidateInfo.policies, {
+    cascade: true,
+    onDelete: 'CASCADE',
+  })
+  @JoinColumn({ name: 'cid' })
+  candidate: CandidateInfo
 }

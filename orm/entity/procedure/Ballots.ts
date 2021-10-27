@@ -19,16 +19,14 @@ export class Ballot {
   @OneToOne(() => Campaign, {
     cascade: false,
     onDelete: 'RESTRICT',
-    onUpdate: 'RESTRICT',
   })
   @JoinColumn({ name: 'cpn_id' })
   campaign: Campaign
 
   @OneToOne(() => CandidateInfo, {
-    cascade: true,
+    cascade: false,
     onDelete: 'RESTRICT',
-    onUpdate: 'RESTRICT',
   })
-  @JoinColumn({ name: 'voter_info' })
-  info: CandidateInfo
+  @JoinColumn({ name: 'cid' })
+  candidate: CandidateInfo
 }

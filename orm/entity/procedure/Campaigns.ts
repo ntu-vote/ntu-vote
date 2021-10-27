@@ -52,11 +52,10 @@ export class Campaign {
   @OneToOne(() => CampaignRule, {
     cascade: false,
     onDelete: 'RESTRICT',
-    onUpdate: 'RESTRICT',
   })
   @JoinColumn({ name: 'cpnr_id' })
-  info: CampaignRule
+  rule: CampaignRule
 
-  @OneToMany(() => CandidateInfo, (candidateInfo) => candidateInfo.cid)
+  @OneToMany(() => CandidateInfo, (candidateInfo) => candidateInfo.campaign)
   candidates: CandidateInfo[]
 }

@@ -31,7 +31,6 @@ export class VoteRecord {
   @OneToOne(() => VoterInfo, {
     cascade: false,
     onDelete: 'RESTRICT',
-    onUpdate: 'RESTRICT',
   })
   @JoinColumn({ name: 'voter_info' })
   voters: VoterInfo
@@ -39,7 +38,6 @@ export class VoteRecord {
   @OneToOne(() => Campaign, {
     cascade: false,
     onDelete: 'RESTRICT',
-    onUpdate: 'RESTRICT',
   })
   @JoinColumn({ name: 'cpn_id' })
   campaign: Campaign

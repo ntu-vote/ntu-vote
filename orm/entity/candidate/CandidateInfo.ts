@@ -1,4 +1,5 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm'
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm'
+import { Campaign } from '../procedure/Campaigns'
 import { CandidatePolicy } from './CandidatePolicies'
 
 @Entity('candidate_info', { schema: 'ntu_vote' })
@@ -12,6 +13,13 @@ export class CandidateInfo {
   @Column('text', { name: 'description', nullable: true })
   description: string | null
 
-  @OneToMany(() => CandidatePolicy, (candidatePolicy) => candidatePolicy.cpid)
-  candidatePolicies: CandidatePolicy[]
+  @OneToMany(() => CandidatePolicy, (candidatePolicy) => candidatePolicy.candidate)
+  policies: CandidatePolicy[]
+  
+  @ManyToOne(() => Campaign, (campaign) => campaign.candidates, {
+    cascade: false,
+    onDelete: 'RESTRICT',
+  })
+  @JoinColumn({ name: 'cpn_id' })
+  campaign: Campaign
 }

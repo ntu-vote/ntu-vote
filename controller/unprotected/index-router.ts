@@ -9,10 +9,7 @@ router.prefix('/')
 
 router.get(
   '/',
-  async (_: Koa.ParameterizedContext, next) => {
-    await next()
-  },
-  async (ctx, _) => {
+  async (ctx:Koa.ParameterizedContext, _) => {
     await IndexProcessor.get({ query: ctx.query } as IIndexProcessor.getIn)
   }
 )
