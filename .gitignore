@@ -1,3 +1,6 @@
+# flow charts
+flow-chart.*
+
 # orm config
 ormconfig.json
 
