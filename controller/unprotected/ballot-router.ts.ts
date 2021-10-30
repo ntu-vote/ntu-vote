@@ -5,7 +5,7 @@ import * as IIndexProcessor from '../../processor/index/index.type'
 
 const router = new Router()
 
-router.prefix('/ntu-vote/api')
+router.prefix('/ntu-vote/api/ballot')
 
 router.get(
   '/',
