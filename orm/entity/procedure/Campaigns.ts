@@ -30,7 +30,7 @@ export class Campaign {
       to: (value: Date) => value,
       from: DateTime.formatTime,
     },
-    nullable: true,
+    nullable: false,
     default: () => 'CURRENT_TIMESTAMP()',
   })
   startTime: string
@@ -41,12 +41,11 @@ export class Campaign {
       to: (value: Date) => value,
       from: DateTime.formatTime,
     },
-    nullable: false,
-    default: () => 'CURRENT_TIMESTAMP()',
+    nullable: true,
   })
   endTime: string | null
 
-  @Column('varchar', { name: 'result', nullable: false, length: 64 })
+  @Column('varchar', { name: 'result', nullable: true, length: 64 })
   result: string
 
   @OneToOne(() => CampaignRule, {
