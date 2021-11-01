@@ -6,8 +6,20 @@ export const getCampaignList = async () => {
 }
 
 export const getCampaign = async (cpnId: string) => {
-  return await getRepository(Campaign).findOne({
-    where: { cpn_id : cpnId },
-    relations: ['rule', 'candidates', 'candidates.policies'],
+  const campaign = await getRepository(Campaign).findOne({
+    where: { cpn_id: cpnId },
+    relations: [
+      'rule',
+      'candidates',
+      'candidates.policies',
+      'candidates.ballots',
+    ],
   })
+  if (!campaign) {
+    return undefined
+  }
+  campaign.candidates.forEach((candidate) => {
+    candidate.ballots = <any>candidate.ballots.length
+  })
+  return campaign
 }

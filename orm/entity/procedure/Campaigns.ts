@@ -9,6 +9,7 @@ import {
 } from 'typeorm'
 import { CampaignRule } from './CampaignRules'
 import { CandidateInfo } from '../candidate/CandidateInfo'
+import { Ballot } from './Ballots'
 
 @Entity('campaigns', { schema: 'ntu_vote' })
 export class Campaign {
@@ -41,9 +42,10 @@ export class Campaign {
       to: (value: Date) => value,
       from: DateTime.formatTime,
     },
-    nullable: true,
+    nullable: false,
+    default: () => 'CURRENT_TIMESTAMP()',
   })
-  endTime: string | null
+  endTime: string
 
   @Column('varchar', { name: 'result', nullable: true, length: 64 })
   result: string
@@ -57,4 +59,7 @@ export class Campaign {
 
   @OneToMany(() => CandidateInfo, (candidateInfo) => candidateInfo.campaign)
   candidates: CandidateInfo[]
+
+  @OneToMany(() => Ballot, (ballot) => ballot.campaign)
+  ballots: Ballot[]
 }

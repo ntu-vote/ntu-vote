@@ -1,4 +1,12 @@
-import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm'
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm'
+import { Ballot } from '../procedure/Ballots'
 import { Campaign } from '../procedure/Campaigns'
 import { CandidatePolicy } from './CandidatePolicies'
 
@@ -13,13 +21,19 @@ export class CandidateInfo {
   @Column('text', { name: 'description', nullable: true })
   description: string | null
 
-  @OneToMany(() => CandidatePolicy, (candidatePolicy) => candidatePolicy.candidate)
+  @OneToMany(
+    () => CandidatePolicy,
+    (candidatePolicy) => candidatePolicy.candidate
+  )
   policies: CandidatePolicy[]
-  
+
   @ManyToOne(() => Campaign, (campaign) => campaign.candidates, {
     cascade: false,
     onDelete: 'RESTRICT',
   })
   @JoinColumn({ name: 'cpn_id' })
   campaign: Campaign
+
+  @OneToMany(() => Ballot, (ballot) => ballot.candidate)
+  ballots: Ballot[]
 }

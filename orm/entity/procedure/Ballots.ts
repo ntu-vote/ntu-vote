@@ -2,7 +2,7 @@ import {
   Column,
   Entity,
   JoinColumn,
-  OneToOne,
+  ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm'
 import { Campaign } from './Campaigns'
@@ -16,14 +16,14 @@ export class Ballot {
   @Column('varchar', { name: 'verification_str', nullable: false, length: 8 })
   verificationStr: string
 
-  @OneToOne(() => Campaign, {
+  @ManyToOne(() => Campaign, (campaign) => campaign.ballots, {
     cascade: false,
     onDelete: 'RESTRICT',
   })
   @JoinColumn({ name: 'cpn_id' })
   campaign: Campaign
 
-  @OneToOne(() => CandidateInfo, {
+  @ManyToOne(() => CandidateInfo, (candidateInfo) => candidateInfo.ballots, {
     cascade: false,
     onDelete: 'RESTRICT',
   })
