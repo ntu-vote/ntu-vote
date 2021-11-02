@@ -1,20 +1,20 @@
 import Koa from 'koa'
 import Router from 'koa-router'
-import CandidateProcessor from '../../processor/campaign/campaign'
-import * as ICandidateProcessor from '../../processor/campaign/campaign.type'
+import CampaignProcessor from '../../processor/campaign/campaign'
+import * as ICampaignProcessor from '../../processor/campaign/campaign.type'
 
 const router = new Router()
 
 router.prefix('/api/campaign')
 
 router.get('/', async (ctx: Koa.ParameterizedContext, _) => {
-  ctx.body = await CandidateProcessor.get()
+  ctx.body = await CampaignProcessor.get()
 })
 
 router.get('/:cpnId', async (ctx: Koa.ParameterizedContext, _) => {
-  ctx.body = await CandidateProcessor.getIdv({
+  ctx.body = await CampaignProcessor.getIdv({
     params: ctx.params,
-  } as ICandidateProcessor.getIdvIn)
+  } as ICampaignProcessor.getIdvIn)
 })
 
 export default router
