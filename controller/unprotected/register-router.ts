@@ -4,7 +4,7 @@ import RegistorProcessor from '../../processor/register/register'
 
 const router = new Router()
 
-router.prefix('/ntu-vote/api/register')
+router.prefix('/api/register')
 
 router.post('/', async  (ctx:Koa.ParameterizedContext, _) => {
 

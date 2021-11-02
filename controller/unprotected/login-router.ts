@@ -4,7 +4,7 @@ import LoginProcessor from '../../processor/login/login'
 
 const router = new Router()
 
-router.prefix('/ntu-vote/api/login')
+router.prefix('/api/login')
 
 router.post('/', async  (ctx:Koa.ParameterizedContext, _) => {
         const authHeader = ctx.headers.authorization
