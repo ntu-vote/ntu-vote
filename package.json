@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "node dist/bin/server.ts",
+    "start": "node dist/bin/server.js",
     "build": "tsc&&cp -RT public dist/public && cp package.json dist/package.json",
     "dev": "npx nodemon -e ts,tsx --exec ts-node bin/server.ts",
     "test": "echo \"Error: no test specified\" && exit 0",
