@@ -1,17 +1,23 @@
 import Koa from 'koa'
 import Router from 'koa-router'
-import IndexProcessor from '../../processor/index/index'
-import * as IIndexProcessor from '../../processor/index/index.type'
+import BallotProcessor from '../../processor/ballot/ballot'
+import * as IBallotProcessor from '../../processor/ballot/ballot.type'
 
 const router = new Router()
 
-router.prefix('/ntu-vote/api/ballot')
+router.prefix('/api/ballot')
 
-router.get(
-  '/',
-  async (ctx:Koa.ParameterizedContext, _) => {
-    await IndexProcessor.get({ query: ctx.query } as IIndexProcessor.getIn)
-  }
-)
+router.get('/key', async (ctx: Koa.ParameterizedContext, _) => {
+  await BallotProcessor.getKey({
+    headers: ctx.headers,
+  } as IBallotProcessor.getKeyIn)
+})
+
+router.post('/cast', async (ctx: Koa.ParameterizedContext, _) => {
+  await BallotProcessor.postCast({
+    headers: ctx.headers,
+    body: ctx.request.body,
+  } as IBallotProcessor.postCastIn)
+})
 
 export default router

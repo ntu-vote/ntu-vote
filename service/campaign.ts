@@ -7,7 +7,7 @@ export const getCampaignList = async () => {
 
 export const getCampaign = async (cpnId: string) => {
   const campaign = await getRepository(Campaign).findOne({
-    where: { cpn_id: cpnId },
+    where: { cpnId: cpnId },
     relations: [
       'rule',
       'candidates',
