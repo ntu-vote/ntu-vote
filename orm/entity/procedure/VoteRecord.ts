@@ -33,7 +33,7 @@ export class VoteRecord {
     onDelete: 'RESTRICT',
   })
   @JoinColumn({ name: 'uid' })
-  voters: VoterInfo
+  voter: VoterInfo
 
   @OneToOne(() => Campaign, {
     cascade: false,

@@ -11,8 +11,21 @@
 \c *db-name*
 CREATE SCHEMA IF NOT EXISTS ntu_vote
 ```
-
-## Usage
+## Usage(js)
+change wildcard pattern extensions in ormconfig.js from `.ts` to `.js`
++ Run ORM migrations
+```
+npm run typeorm-run
+```
++ Transpile ts to js
+```
+npm run build
+```
++ Start server
+```
+npm run start
+```
+## Usage(ts)
 + Run ORM migrations
 ```
 npm run typeorm-run

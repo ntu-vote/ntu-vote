@@ -14,7 +14,7 @@ import { Ballot } from './Ballots'
 @Entity('campaigns', { schema: 'ntu_vote' })
 export class Campaign {
   @PrimaryGeneratedColumn({ type: 'int', name: 'cpn_id' })
-  cpn_id: number
+  cpnId: number
 
   @Column('varchar', { name: 'title', nullable: false, length: 256 })
   title: string

@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "node dist/bin/server.ts",
+    "start": "node dist/bin/server.js",
     "build": "tsc&&cp -RT public dist/public && cp package.json dist/package.json",
     "dev": "npx nodemon -e ts,tsx --exec ts-node bin/server.ts",
     "test": "echo \"Error: no test specified\" && exit 0",
@@ -14,6 +14,7 @@
     "typeorm-revert": "ts-node ./node_modules/typeorm/cli -f ./ormconfig.json migration:revert"
   },
   "dependencies": {
+    "@koa/cors": "^3.1.0",
     "bcryptjs": "^2.4.3",
     "cron": "1.8.2",
     "debug": "4.3.2",
@@ -39,6 +40,7 @@
     "@types/debug": "4.1.7",
     "@types/ioredis": "4.27.8",
     "@types/koa": "2.13.4",
+    "@types/koa__cors": "^3.0.3",
     "@types/koa-bodyparser": "4.3.3",
     "@types/koa-generic-session": "1.0.6",
     "@types/koa-json": "2.0.20",
