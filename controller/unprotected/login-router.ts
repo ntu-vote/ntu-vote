@@ -6,32 +6,34 @@ const router = new Router()
 
 router.prefix('/api/login')
 
-router.post('/', async  (ctx:Koa.ParameterizedContext, _) => {
-        const authHeader = ctx.headers.authorization
+router.post('/', async (ctx: Koa.ParameterizedContext, _) => {
+  const authHeader = ctx.headers.authorization
 
-        if (authHeader === undefined) {
-            ctx.body = {
-                status: 'Error',
-                message: 'ERR_MISSING_HEADER'
-            }
-            return;
-        }
-      
-        const username = authHeader.split(" ")[1].split(":")[0]
-        const claimedPassword = authHeader.split(" ")[1].split(":")[1]
+  if (authHeader === undefined) {
+    ctx.body = {
+      status: 'Error',
+      message: 'ERR_MISSING_HEADER',
+    }
+    return
+  }
 
-        if (username === undefined || claimedPassword === undefined) {
-            ctx.body = {
-                status: 'Error',
-                message: 'ERR_MISSING_INFO'
-            }
-            return;
-        }
+  const username = authHeader.split(' ')[1].split(':')[0]
+  const claimedPassword = authHeader.split(' ')[1].split(':')[1]
 
-        ctx.body = await LoginProcessor.post({
-            params: {
-                username: username,
-                claimedPassword: claimedPassword
-            }
-        })
+  if (username === undefined || claimedPassword === undefined) {
+    ctx.body = {
+      status: 'Error',
+      message: 'ERR_MISSING_INFO',
+    }
+    return
+  }
+
+  ctx.body = await LoginProcessor.post({
+    params: {
+      username: username,
+      claimedPassword: claimedPassword,
+    },
+  })
 })
+
+export default router
