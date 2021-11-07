@@ -42,11 +42,13 @@ export const castVote = async (
   voteRecord.voter = voter
   voteRecord.campaign = campaign
   voteRecord.signed_msg = votedProof
+  await getRepository(VoteRecord).save(voteRecord)
 
   const ballot = new Ballot()
   ballot.campaign = campaign
   ballot.candidate = candidate
   ballot.verificationStr = ballotProof
+  await getRepository(Ballot).save(ballot)
 
   return { status: 'Success' }
 }
