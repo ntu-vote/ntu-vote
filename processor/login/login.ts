@@ -23,7 +23,6 @@ export default class LoginProcessor {
     const { passwordHash, ...payload } = voter;
   
     const token = generateAccessToken(payload);
-
     output.status = 'Success'
     output.params = {
       username: voter.username,
