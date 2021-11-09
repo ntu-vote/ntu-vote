@@ -12,7 +12,7 @@
 CREATE SCHEMA IF NOT EXISTS ntu_vote
 ```
 ## Usage(js)
-change wildcard pattern extensions in ormconfig.js from `.ts` to `.js`
+change wildcard pattern extensions in ormconfig.json from `.ts` to `.js` and copy ormconfig.json to dist folder
 + Run ORM migrations
 ```
 npm run typeorm-run
