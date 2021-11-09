@@ -23,10 +23,11 @@ export const createNewVoter = async ({ params }: IRegistorProcessor.postIn) => {
     const voter_account = new VoterAccount();
     voter_account.username = params.username;
     voter_account.passwordHash = params.passwordHash;
-    // strange
+    // strange, turns out it actually works!
     voter_account.info = voter_uid;
     voter_account.publicKey = voter_pub_id;
     voter_account.privateKey = voter_prv_id;
+    await getRepository(VoterAccount).save(voter_account);
 
     return voter_uid;
 }
