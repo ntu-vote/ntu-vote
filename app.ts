@@ -3,6 +3,7 @@ import cors from '@koa/cors'
 import json from 'koa-json'
 import 'reflect-metadata'
 import { createConnection } from 'typeorm'
+import { CronJob } from 'cron' 
 
 import {
   staticMiddleware,
@@ -15,6 +16,10 @@ import { authMiddleware } from './middleware/authorization'
 import { unprotectedRoutes, protectedRoutes } from './controller/router'
 import config from './config'
 
+import { Campaign } from './orm/entity/procedure/Campaigns'
+import { Ballot } from './orm/entity/procedure/Ballots'
+import { getRepository } from 'typeorm'
+
 const app = new Koa()
 
 app.keys = config.sessionKeys
@@ -23,6 +28,55 @@ app.keys = config.sessionKeys
 const connectionPromise = createConnection()
 Promise.all([connectionPromise]).then(() => {
   //cron jobs here
+  
+  // Update result of campaigns every 10 minutes * */10 * * * *
+  new CronJob({cronTime: '5 * * * * *', onTick: async function () {
+      const campaignList = await getRepository(Campaign).find({ 
+        relations: [
+          'rule',
+          'candidates',
+          'candidates.ballots',
+        ] 
+      })
+      const now = new Date()
+      console.log(now)
+      campaignList.forEach(async (campaign) => {
+        // already have a result
+        if (campaign.result != null || campaign.result != '') {
+          return;
+        }
+        
+        // count votes only when the event ends
+        const now = new Date()
+        const endTime = new Date(campaign.endTime)
+        if (now < endTime) {
+          return;
+        }
+
+        // announce winner
+        const winner = { cid: -1, votes: -1}
+        if (campaign.rule.rule == '多數決' || campaign.rule.rule == 'majority') {
+          campaign.candidates.forEach((candidate) => {
+              if (candidate.ballots.length > winner.votes) {
+                winner.cid = candidate.cid
+                winner.votes = candidate.ballots.length
+              }
+          })
+        } else {
+          campaign.candidates.forEach((candidate) => {
+            if (candidate.ballots.length > winner.votes) {
+              winner.cid = candidate.cid
+              winner.votes = candidate.ballots.length
+            }
+          })
+        }
+
+        // update campaign result
+        console.log(campaign.title, winner.cid, winner.votes)
+        campaign.result = String(winner.cid)
+        await getRepository(Campaign).save(campaign);
+      })
+  }, onComplete: null, start: true });
 })
 
 // middlewares
