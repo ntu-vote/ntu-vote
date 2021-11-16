@@ -29,8 +29,8 @@ const connectionPromise = createConnection()
 Promise.all([connectionPromise]).then(() => {
   //cron jobs here
   
-  // Update result of campaigns every 10 minutes * */10 * * * *
-  new CronJob({cronTime: '5 * * * * *', onTick: async function () {
+  // Update result of campaigns every 10 minutes
+  new CronJob({cronTime: '* */10 * * * *', onTick: async function () {
       const campaignList = await getRepository(Campaign).find({ 
         relations: [
           'rule',
