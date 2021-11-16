@@ -1,0 +1,17 @@
+{
+  "name": "default",
+  "type": "postgres",
+  "host": "localhost",
+  "port": 5432,
+  "username": "database-user",
+  "password": "database-password",
+  "database": "ntu_vote",
+  "synchronize": false,
+  "logging": false,
+  "entities": ["dist/orm/entity/**/*.js"],
+  "migrations": ["dist/orm/migration/**/*.js"],
+  "cli": {
+    "entitiesDir": "dist/orm/entity",
+    "migrationsDir": "dist/orm/migration"
+  }
+}
