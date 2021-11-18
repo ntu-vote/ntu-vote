@@ -28,11 +28,11 @@ export default class BallotProcessor {
     const output: IBallotProcessor.postCastOut = {
       status: 'Error',
     }
-    if (!input.body.cpnId || !validator.isInt(input.body.cpnId || '')) {
+    if (!input.body.cpnId || !(typeof input.body.cpnId == 'number')) {
       output.message = 'ERR_INVALID_CPN_ID'
       return output
     }
-    if (!input.body.cid || !validator.isInt(input.body.cid || '')) {
+    if (!input.body.cid || !(typeof input.body.cid == 'number')) {
       output.message = 'ERR_INVALID_CID'
       return output
     }

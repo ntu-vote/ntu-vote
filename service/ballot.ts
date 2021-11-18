@@ -7,8 +7,8 @@ import { Ballot } from '../orm/entity/procedure/Ballots'
 
 export const castVote = async (
   voterUid: string,
-  cpnId: string,
-  cid: string,
+  cpnId: number,
+  cid: number,
   votedProof: string,
   ballotProof: string
 ) => {
@@ -20,7 +20,7 @@ export const castVote = async (
     return { status: 'Error', message: 'ERR_VOTER_ALREADY_VOTED' }
   }
   const campaign = await getRepository(Campaign).findOne({
-    cpnId: parseInt(cpnId),
+    cpnId: cpnId,
   })
   if (!campaign) {
     return { status: 'Error', message: 'ERR_NONEXISTENT_CPN_ID' }
@@ -32,7 +32,7 @@ export const castVote = async (
     return { status: 'Error', message: 'ERR_NONEXISTENT_UID' }
   }
   const candidate = await getRepository(CandidateInfo).findOne({
-    cid: parseInt(cid),
+    cid: cid,
   })
   if (!candidate) {
     return { status: 'Error', message: 'ERR_NONEXISTENT_CID' }
