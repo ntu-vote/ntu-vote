@@ -17,7 +17,6 @@ import { unprotectedRoutes, protectedRoutes } from './controller/router'
 import config from './config'
 
 import { Campaign } from './orm/entity/procedure/Campaigns'
-import { Ballot } from './orm/entity/procedure/Ballots'
 import { getRepository } from 'typeorm'
 
 const app = new Koa()
@@ -30,7 +29,7 @@ Promise.all([connectionPromise]).then(() => {
   //cron jobs here
   
   // Update result of campaigns every 10 minutes
-  new CronJob({cronTime: '* */10 * * * *', onTick: async function () {
+  new CronJob({cronTime: '*/10 * * * *', onTick: async function () {
       const campaignList = await getRepository(Campaign).find({ 
         relations: [
           'rule',
