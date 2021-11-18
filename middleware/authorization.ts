@@ -44,7 +44,11 @@ export const authMiddleware = async (ctx: Koa.ParameterizedContext, next: Next) 
       }
   } catch (err: any) {
       if (err.message == 'jwt expired') {
-          return ctx.redirect('/')
+        ctx.body = {
+          status: 'Error',
+          message: 'ERR_JWT_EXPIRED'
+        };
+        return;
       }
       ctx.body = {
         status: 'Error',
