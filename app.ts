@@ -39,7 +39,7 @@ Promise.all([connectionPromise]).then(() => {
         ] 
       })
       const now = new Date()
-      console.log(now)
+      // console.log(now)
       campaignList.forEach(async (campaign) => {
         // already have a result
         if (campaign.result != null || campaign.result != '') {
@@ -72,7 +72,7 @@ Promise.all([connectionPromise]).then(() => {
         }
 
         // update campaign result
-        console.log(campaign.title, winner.cid, winner.votes)
+        // console.log(campaign.title, winner.cid, winner.votes)
         campaign.result = String(winner.cid)
         await getRepository(Campaign).save(campaign);
       })
