@@ -13,8 +13,8 @@ export class Ballot {
   @PrimaryGeneratedColumn({ type: 'int', name: 'bid' })
   bid: number
 
-  @Column('varchar', { name: 'verification_str', nullable: false, length: 8 })
-  verificationStr: string
+  @Column('text', { name: 'verification', nullable: false })
+  verification: string
 
   @ManyToOne(() => Campaign, (campaign) => campaign.ballots, {
     cascade: false,

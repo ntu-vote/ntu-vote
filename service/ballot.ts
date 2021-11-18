@@ -51,7 +51,7 @@ export const castVote = async (
   const ballot = new Ballot()
   ballot.campaign = campaign
   ballot.candidate = candidate
-  ballot.verificationStr = ballotProof
+  ballot.verification = ballotProof
   await getRepository(Ballot).save(ballot)
 
   return { status: 'Success' }
