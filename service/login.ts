@@ -4,6 +4,6 @@ import { getRepository } from 'typeorm'
 export const searchVoterAccount = async (username: string) => {
     return await getRepository(VoterAccount).findOne({ 
         where: { username: username },
-        relations: ['info']
+        relations: ['info', 'publicKey', 'privateKey']
      });
 }
