@@ -4,17 +4,27 @@ import { Campaign } from '../orm/entity/procedure/Campaigns'
 import { VoterInfo } from '../orm/entity/voter/VoterInfo'
 import { CandidateInfo } from '../orm/entity/candidate/CandidateInfo'
 import { Ballot } from '../orm/entity/procedure/Ballots'
+import { VoterAccount } from '../orm/entity/voter/VoterAccounts'
 
 export const castVote = async (
-  voterUid: string,
+  voterName: string,
   cpnId: number,
   cid: number,
   votedProof: string,
   ballotProof: string
 ) => {
+  const voter = await getRepository(VoterAccount).findOne({
+    where: {
+      username: voterName,
+    },
+    relations: ['info'],
+  })
+  if (!voter) {
+    return { status: 'Error', message: 'ERR_NONEXISTENT_UID' }
+  }
   if (
     await getRepository(VoteRecord).findOne({
-      voter: { uid: parseInt(voterUid) },
+      voter: voter.info,
     })
   ) {
     return { status: 'Error', message: 'ERR_VOTER_ALREADY_VOTED' }
@@ -25,12 +35,6 @@ export const castVote = async (
   if (!campaign) {
     return { status: 'Error', message: 'ERR_NONEXISTENT_CPN_ID' }
   }
-  const voter = await getRepository(VoterInfo).findOne({
-    uid: parseInt(voterUid),
-  })
-  if (!voter) {
-    return { status: 'Error', message: 'ERR_NONEXISTENT_UID' }
-  }
   const candidate = await getRepository(CandidateInfo).findOne({
     cid: cid,
   })
@@ -39,7 +43,7 @@ export const castVote = async (
   }
 
   const voteRecord = new VoteRecord()
-  voteRecord.voter = voter
+  voteRecord.voter = voter.info
   voteRecord.campaign = campaign
   voteRecord.signed_msg = votedProof
   await getRepository(VoteRecord).save(voteRecord)
