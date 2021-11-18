@@ -40,6 +40,7 @@ export const authMiddleware = async (ctx: Koa.ParameterizedContext, next: Next) 
           status: 'Error',
           message: 'ERR_MISMATCHED_JWT'
         }
+        return;
       }
   } catch (err: any) {
       if (err.message == 'jwt expired') {
@@ -47,8 +48,9 @@ export const authMiddleware = async (ctx: Koa.ParameterizedContext, next: Next) 
       }
       ctx.body = {
         status: 'Error',
-        message: 'ERR_SOMETHING_WRONG'
+        message: 'ERR_INVALID_JWT'
       };
+      return;
   }
 
   await next();
