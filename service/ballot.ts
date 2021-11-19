@@ -25,6 +25,7 @@ export const castVote = async (
   if (
     await getRepository(VoteRecord).findOne({
       voter: voter.info,
+      campaign: { cpnId },
     })
   ) {
     return { status: 'Error', message: 'ERR_VOTER_ALREADY_VOTED' }
