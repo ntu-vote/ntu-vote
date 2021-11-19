@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm'
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm'
+import { VoteRecord } from '../procedure/VoteRecord'
 
 @Entity('voter_info', { schema: 'ntu_vote' })
 export class VoterInfo {
@@ -18,4 +19,7 @@ export class VoterInfo {
     unique: true,
   })
   studentId: string
+  
+  @OneToMany(() => VoteRecord, (voteRecord) => voteRecord.voter)
+  voteRecords: VoteRecord[]
 }

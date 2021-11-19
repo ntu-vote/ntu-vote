@@ -10,6 +10,7 @@ import {
 import { CampaignRule } from './CampaignRules'
 import { CandidateInfo } from '../candidate/CandidateInfo'
 import { Ballot } from './Ballots'
+import { VoteRecord } from './VoteRecord'
 
 @Entity('campaigns', { schema: 'ntu_vote' })
 export class Campaign {
@@ -59,6 +60,9 @@ export class Campaign {
 
   @OneToMany(() => CandidateInfo, (candidateInfo) => candidateInfo.campaign)
   candidates: CandidateInfo[]
+
+  @OneToMany(() => VoteRecord, (voteRecord) => voteRecord.campaign)
+  voteRecords: VoteRecord[]
 
   @OneToMany(() => Ballot, (ballot) => ballot.campaign)
   ballots: Ballot[]
