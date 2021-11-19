@@ -3,6 +3,7 @@ import {
   Column,
   Entity,
   JoinColumn,
+  ManyToOne,
   OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
@@ -50,8 +51,8 @@ export class Campaign {
 
   @Column('varchar', { name: 'result', nullable: true, length: 64 })
   result: string
-
-  @OneToOne(() => CampaignRule, {
+  
+  @ManyToOne(() => CampaignRule, (campaignRule) => campaignRule.campaigns, {
     cascade: false,
     onDelete: 'RESTRICT',
   })

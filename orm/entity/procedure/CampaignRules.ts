@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm'
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm'
+import { Campaign } from './Campaigns'
 
 @Entity('campaign_rules', { schema: 'ntu_vote' })
 export class CampaignRule {
@@ -18,4 +19,7 @@ export class CampaignRule {
 
   @Column('text', { name: 'description', nullable: false })
   description: string
+  
+  @OneToMany(() => Campaign, (campaign) => campaign.rule)
+  campaigns: Campaign[]
 }
