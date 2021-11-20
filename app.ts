@@ -53,12 +53,13 @@ Promise.all([connectionPromise]).then(() => {
         }
 
         // announce winner
-        const winner = { cid: -1, votes: -1}
+        const winner = { cid: -1, votes: -1, name: ''}
         if (campaign.rule.rule == '多數決' || campaign.rule.rule == 'majority') {
           campaign.candidates.forEach((candidate) => {
               if (candidate.ballots.length > winner.votes) {
                 winner.cid = candidate.cid
                 winner.votes = candidate.ballots.length
+                winner.name = candidate.name
               }
           })
         } else {
@@ -66,13 +67,14 @@ Promise.all([connectionPromise]).then(() => {
             if (candidate.ballots.length > winner.votes) {
               winner.cid = candidate.cid
               winner.votes = candidate.ballots.length
+              winner.name = candidate.name
             }
           })
         }
 
         // update campaign result
         // console.log(campaign.title, winner.cid, winner.votes)
-        campaign.result = String(winner.cid)
+        campaign.result = winner.name
         await getRepository(Campaign).save(campaign);
       })
   }, onComplete: null, start: true });
