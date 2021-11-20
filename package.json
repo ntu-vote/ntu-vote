@@ -27,7 +27,7 @@
     "koa-generic-session": "2.2.0",
     "koa-json": "2.0.2",
     "koa-redis": "4.0.1",
-    "koa-router": "9.4.0",
+    "koa-router": "10.1.1",
     "koa-static": "5.0.0",
     "node-fetch": "2.6.5",
     "pg": "^8.7.1",
