@@ -18,8 +18,8 @@ export interface postCastIn {
     authorization: string
   }
   body: {
-    cpnId: string | undefined
-    cid: string | undefined
+    cpnId: any
+    cid: any
     votedProof: string | undefined
     ballotProof: string | undefined
   }

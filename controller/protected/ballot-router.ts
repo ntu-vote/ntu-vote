@@ -8,13 +8,13 @@ const router = new Router()
 router.prefix('/api/ballot')
 
 router.get('/key', async (ctx: Koa.ParameterizedContext, _) => {
-  await BallotProcessor.getKey({
+  ctx.body = await BallotProcessor.getKey({
     headers: ctx.headers,
   } as IBallotProcessor.getKeyIn)
 })
 
 router.post('/cast', async (ctx: Koa.ParameterizedContext, _) => {
-  await BallotProcessor.postCast({
+  ctx.body = await BallotProcessor.postCast({
     headers: ctx.headers,
     body: ctx.request.body,
   } as IBallotProcessor.postCastIn)

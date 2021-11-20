@@ -3,7 +3,7 @@ import {
   Column,
   Entity,
   JoinColumn,
-  OneToOne,
+  ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm'
 import { VoterInfo } from '../voter/VoterInfo'
@@ -28,14 +28,14 @@ export class VoteRecord {
   })
   votedTime: string
 
-  @OneToOne(() => VoterInfo, {
+  @ManyToOne(() => VoterInfo, (voterInfo) => voterInfo.voteRecords, {
     cascade: false,
     onDelete: 'RESTRICT',
   })
   @JoinColumn({ name: 'uid' })
   voter: VoterInfo
 
-  @OneToOne(() => Campaign, {
+  @ManyToOne(() => Campaign, (campaign) => campaign.voteRecords, {
     cascade: false,
     onDelete: 'RESTRICT',
   })
