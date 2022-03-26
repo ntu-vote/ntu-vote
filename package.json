@@ -41,7 +41,7 @@
     "@types/ioredis": "4.27.8",
     "@types/koa": "2.13.4",
     "@types/koa__cors": "^3.0.3",
-    "@types/koa-bodyparser": "4.3.3",
+    "@types/koa-bodyparser": "4.3.7",
     "@types/koa-generic-session": "1.0.6",
     "@types/koa-json": "2.0.20",
     "@types/koa-logger": "3.1.2",
